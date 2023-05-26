@@ -1,0 +1,26 @@
+
+# Instale o ggplot2
+install.packages("ggplot2")
+
+# Importe a biblioteca ggplot2
+library(ggplot2)
+
+# Leia a tabela com os dados
+dados <- read.csv("caminho/para/o/arquivo.csv", header = TRUE, sep = ";") # Substitua pelo caminho correto do arquivo CSV
+dados
+
+# Filtrar os dados para a classe "água"
+dados_agua <- subset(dados, class == "33")
+
+# Criar o gráfico de barras da evolução da área da classe "água" com fundo branco
+grafico <- ggplot(dados_agua, aes(x = year, y = area)) +
+  geom_bar(stat = "identity", fill = "steelblue", width = 0.5, position = "dodge") +
+  labs(title = "Evolução da superfície dos corpos d'água",
+       x = "Ano",
+       y = "Área (km2)") +
+  theme_minimal() +
+  theme(plot.background = element_rect(fill = "white"),
+        panel.background = element_blank())
+
+# Exibir o gráfico
+print(grafico)
