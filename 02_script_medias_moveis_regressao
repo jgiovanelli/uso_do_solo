@@ -1,0 +1,45 @@
+
+# Instale o ggplot2
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("stats")
+
+# Importe a biblioteca ggplot2
+library(ggplot2)
+library(dplyr)
+library(stats)
+
+# Leia a tabela com os dados
+dados <- read.csv("mudar", header = TRUE, sep = ";") # Substitua pelo caminho correto do arquivo CSV
+dados
+
+# Filtrar os dados para a classe "água"
+dados_agua <- filter(dados, class == "corpos_agua")
+
+# Calcular a média móvel com janela de 3 anos
+dados_agua <- dados_agua %>%
+  arrange(year) %>%
+  mutate(media_movel = zoo::rollmean(area, k = 3, fill = NA))
+
+# Plotar o gráfico de barras com a média móvel
+grafico <- ggplot(dados_agua, aes(x = year, y = area)) +
+  geom_bar(stat = "identity", fill = "steelblue", width = 0.8, position = "dodge") +
+  geom_line(aes(x = year, y = media_movel), color = "red", linetype = "dashed") +
+  labs(title = "Evolução da Área da Classe 'Água' com Média Móvel",
+       x = "Ano",
+       y = "Área (em hectares)") +
+  theme_minimal()
+
+# Exibir o gráfico
+print(grafico)
+
+#análise de regressão
+
+# Filtrar os dados para a classe "água"
+dados_agua <- subset(dados, class == "corpos_agua")
+
+# Realizar a análise de regressão linear
+modelo <- lm(area ~ year, data = dados_agua)
+
+# Obter o resumo do modelo
+summary(modelo)
