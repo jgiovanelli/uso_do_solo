@@ -5,7 +5,7 @@ install.packages("ggplot2")
 library(ggplot2)
 
 # Leia a tabela com os dados
-dados <- read.csv("C:/Users/Joao/Dropbox/SELEÇÃO NATURAL/Projetos/Manejo e Recuperação Ambiental/23-03_GAJA_PM_APA_Lagoa_Itaparica/Uso do Solo/areas_2.csv", header = TRUE, sep = ";") # Substitua pelo caminho correto do arquivo CSV
+dados <- read.csv(""caminho/para/o/arquivo.csv"", header = TRUE, sep = ";") # Substitua pelo caminho correto do arquivo CSV
 dados
 
 # Definir uma paleta de cores distintas para cada classe
