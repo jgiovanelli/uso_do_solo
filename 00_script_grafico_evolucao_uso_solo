@@ -1,0 +1,26 @@
+# Instale o ggplot2
+install.packages("ggplot2")
+
+# Importe a biblioteca ggplot2
+library(ggplot2)
+
+# Leia a tabela com os dados
+dados <- read.csv("C:/Users/Joao/Dropbox/SELEÇÃO NATURAL/Projetos/Manejo e Recuperação Ambiental/23-03_GAJA_PM_APA_Lagoa_Itaparica/Uso do Solo/areas_2.csv", header = TRUE, sep = ";") # Substitua pelo caminho correto do arquivo CSV
+dados
+
+# Definir uma paleta de cores distintas para cada classe
+#cores <- c("#b8af4f", "#0000ff", "#dd7e6b", "#fff3bf", "#ffd966", "#00ff00")
+
+# Criar o gráfico de linha da evolução da área de classes de uso do solo com cores distintas
+grafico <- ggplot(dados, aes(x = year, y = area, color = class)) +
+  geom_line(size = 1) +
+  geom_point() +
+  theme_bw() +
+  labs(title = "Evolução da Área de Classes de Uso do Solo",
+       x = "Ano",
+       y = "Área (km2)",
+       color = "Classes") +
+  scale_color_manual(values = cores)
+
+# Exibir o gráfico
+print(grafico)
